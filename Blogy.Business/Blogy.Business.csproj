@@ -10,4 +10,19 @@
     <ProjectReference Include="..\Blogy.DataAccess\Blogy.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="DTOS\BlogDtos\" />
+    <Folder Include="DTOS\BlogTagDtos\" />
+    <Folder Include="DTOS\TagDtos\" />
+    <Folder Include="Services\BlogServices\" />
+    <Folder Include="Services\TagServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+  </ItemGroup>
+
 </Project>

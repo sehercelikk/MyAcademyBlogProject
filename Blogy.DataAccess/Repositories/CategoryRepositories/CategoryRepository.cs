@@ -4,7 +4,7 @@ using Blogy.Entities.Concrete;
 
 namespace Blogy.DataAccess.Repositories.CategoryRepositories;
 
-public class CategoryRepository : GenericRepository<Category>, ICategoryRepo
+public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
 {
     public CategoryRepository(AppDbContext context) : base(context)
     {
