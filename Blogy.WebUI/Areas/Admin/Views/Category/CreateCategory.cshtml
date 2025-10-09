@@ -1,0 +1,15 @@
+﻿@model CreateCategoryDto
+@{
+    ViewData["Title"] = "CreateCategory";
+}
+
+<h1>Kategori Ekle</h1>
+<div class="container">
+    <form method="post">
+        <label>Kategori Adı</label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+        <button class="btn btn-primary">Ekle</button>
+    </form>
+</div>
+
