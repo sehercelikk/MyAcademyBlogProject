@@ -1,16 +1,18 @@
-﻿@model CreateCategoryDto
+﻿@model UpdateCategoryDto
 @{
-    ViewData["Title"] = "CreateCategory";
+    ViewData["Title"] = "UpdateCategory";
 }
 
-<h1>Kategori Ekle</h1>
+<h1>Kategori Güncelle</h1>
 <div class="container">
     <form method="post">
+        <input type="hidden" asp-for="Id" />
         <label>Kategori Adı</label>
         <input type="text" asp-for="Name" class="form-control" />
         <span class="text-danger" asp-validation-for="Name"></span>
         <br />
-        <button class="btn btn-primary">Ekle</button>
+        <button class="btn btn-primary">Güncelle</button>
     </form>
 </div>
+
 

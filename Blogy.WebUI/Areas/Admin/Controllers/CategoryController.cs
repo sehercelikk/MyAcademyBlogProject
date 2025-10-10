@@ -26,11 +26,34 @@ public class CategoryController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateCategory(CreateCategoryDto model)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(model);
         }
         await _categoryService.CreateCategoryAsync(model);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> UpdateCategory(int id)
+    {
+        var category = await _categoryService.GetCategoryByIdAsync(id);
+        return View(category);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateCategory(UpdateCategoryDto model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+        await _categoryService.UpdateCategoryAsync(model);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+        await _categoryService.DeleteCategoryAsync(id);
         return RedirectToAction(nameof(Index));
     }
 }

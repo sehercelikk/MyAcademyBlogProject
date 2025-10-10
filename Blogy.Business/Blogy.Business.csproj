@@ -11,10 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOS\BlogDtos\" />
     <Folder Include="DTOS\BlogTagDtos\" />
     <Folder Include="DTOS\TagDtos\" />
-    <Folder Include="Services\BlogServices\" />
     <Folder Include="Services\TagServices\" />
   </ItemGroup>
 
