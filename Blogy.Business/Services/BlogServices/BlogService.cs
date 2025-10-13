@@ -26,7 +26,7 @@ public class BlogService(IBlogRepository _blog,IMapper _mapper) : IBlogService
 
     public async Task<List<ResultBlogDto>> GetBlogWithCategoryAsync()
     {
-        var result= _blog.GetBlogWithCategoryAsync();
+        var result=await _blog.GetBlogWithCategoryAsync();
         return _mapper.Map<List<ResultBlogDto>>(result);
     }
 

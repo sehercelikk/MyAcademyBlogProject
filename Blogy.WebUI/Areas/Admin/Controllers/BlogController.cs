@@ -1,6 +1,8 @@
 ﻿using Blogy.Business.DTOS.BlogDtos;
 using Blogy.Business.Services.BlogServices;
+using Blogy.Business.Services.CategoryServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
 namespace Blogy.WebUI.Areas.Admin.Controllers;
@@ -9,10 +11,22 @@ namespace Blogy.WebUI.Areas.Admin.Controllers;
 public class BlogController : Controller
 {
     private readonly IBlogService _blogService;
-
-    public BlogController(IBlogService blogService)
+    private readonly ICategoryService _categoryService;
+    public BlogController(IBlogService blogService, ICategoryService categoryService)
     {
         _blogService = blogService;
+        _categoryService = categoryService;
+    }
+
+    private async Task GetCategories()
+    {
+        var categories =await _categoryService.GetAllCategoryAsync();
+        ViewBag.Categories = (from category in categories
+                              select new SelectListItem
+                              {
+                                  Text = category.Name,
+                                  Value = category.Id.ToString()
+                              }).ToList();
     }
 
     public async Task<IActionResult> Index()
@@ -21,21 +35,46 @@ public class BlogController : Controller
         return View(result);
     }
 
-    public IActionResult CreateBlog()=>View();
+    public async Task<IActionResult> CreateBlog()
+    {
+        await GetCategories();
+        return View();
+    }
 
     [HttpPost]
-    public IActionResult CreateBlog(CreateBlogDto model)
+    public async Task<IActionResult> CreateBlog(CreateBlogDto model)
     {
-        return View();
+        if(!ModelState.IsValid)
+        {
+            await GetCategories();
+            return View(model);
+        }
+        await _blogService.CreateAsync(model);
+        return RedirectToAction(nameof(Index));
     }
 
-    public IActionResult UpdateBlog(int id)
+    public async Task<IActionResult> UpdateBlog(int id)
     {
-        return View();
+        await GetCategories();
+        var blog = await _blogService.GetByIdAsync(id);
+        return View(blog);
     }
 
-    public IActionResult DeleteBlog(int id)
+    [HttpPost]
+    public async Task<IActionResult> UpdateBlog(UpdateBlogDto model)
     {
-        return View();
+        if(!ModelState.IsValid)
+        {
+            await GetCategories();
+            return View(model);
+        }
+        await _blogService.UpdateAsync(model);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> DeleteBlog(int id)
+    {
+        await _blogService.DeleteAsync(id);
+        return RedirectToAction(nameof(Index));
     }
 }
