@@ -5,6 +5,7 @@ namespace Blogy.Business.Services.CategoryServices;
 public interface ICategoryService
 {
     Task<List<ResultCategoryDto>> GetAllCategoryAsync();
+    Task<List<ResultCategoryDto>> GetCategoryWithBlogsAsync();
     Task<UpdateCategoryDto> GetCategoryByIdAsync(int id);
     Task CreateCategoryAsync(CreateCategoryDto createCategoryDto);
     Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto);

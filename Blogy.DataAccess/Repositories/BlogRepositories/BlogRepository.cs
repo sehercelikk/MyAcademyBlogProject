@@ -15,5 +15,8 @@ public class BlogRepository : GenericRepository<Blog>, IBlogRepository
     {
        var query= await _table.Include(b => b.Category).ToListAsync();
         return query;
+
+
+
     }
 }
