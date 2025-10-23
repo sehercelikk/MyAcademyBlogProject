@@ -43,6 +43,12 @@ public class BlogService(IBlogRepository _blog,IMapper _mapper) : IBlogService
 
     }
 
+    public async Task<List<ResultBlogDto>> GetLast3BlogsAsync()
+    {
+        var result= await _blog.GetLast3BlogsAsync();
+        return _mapper.Map<List<ResultBlogDto>>(result);
+    }
+
     public async Task UpdateAsync(UpdateBlogDto updateDto)
     {
        await _blog.UpdateAsync(_mapper.Map<Blog>(updateDto));

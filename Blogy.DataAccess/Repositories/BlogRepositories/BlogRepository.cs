@@ -19,4 +19,10 @@ public class BlogRepository : GenericRepository<Blog>, IBlogRepository
 
 
     }
+
+    public async Task<List<Blog>> GetLast3BlogsAsync()
+    {
+        var blogs= await _table.OrderByDescending(b => b.Id).Take(3).ToListAsync();
+        return blogs;
+    }
 }
