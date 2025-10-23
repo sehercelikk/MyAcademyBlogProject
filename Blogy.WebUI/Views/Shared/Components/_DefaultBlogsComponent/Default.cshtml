@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <h2 class="posts-entry-title">@category.Name</h2>
                 </div>
-                <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">Tümünü Gör</a></div>
+                <div class="col-sm-6 text-sm-end"><a href="/Blog/GetBlogsByCategory/@category.Id" class="read-more">Tümünü Gör</a></div>
             </div>
 
             <div class="row">
@@ -33,7 +33,7 @@
                                     <span>&nbsp;-&nbsp; @blog.CreatedDate.ToShortDateString()</span>
                                 </div>
 
-                                <p>@blog.Description.Substring(0,100) ...</p>
+                                <p>@(blog.Description.Length < 100 ? blog.Description : blog.Description.Substring(0, 100) + "...")</p>
                                 <p><a href="#" class="read-more">Devamını Oku</a></p>
                             </div>
                         </div>
