@@ -1,0 +1,33 @@
+﻿@using Blogy.Entities.Concrete
+@model List<AppRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<h1>Roller</h1>
+
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>Rol Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Name</td>
+                <td><a href="/Admin/Role/DeleteRole/@item.Id" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Admin/Role/UpdateRole/@item.Id" class="btn btn-outline-primary">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Admin/Role/CreateRole" class="btn btn-outline-success">Ekle</a>
+</div>
+

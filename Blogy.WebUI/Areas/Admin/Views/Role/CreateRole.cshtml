@@ -1,0 +1,19 @@
+﻿@using Blogy.Entities.Concrete
+@model AppRole
+@{
+    ViewData["Title"] = "CreateRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h3>Rol Ekle</h3>
+    <form method="post">
+        <div class="form-group">
+            <label>Rol Adı</label>
+            <input type="text" asp-for="Name" class="form-control" required />
+        </div>
+        <br />
+        <span class="text-danger">@Html.ValidationSummary()</span>
+        <button class="btn btn-outline-success">Ekle</button>
+    </form>
+</div>
+
