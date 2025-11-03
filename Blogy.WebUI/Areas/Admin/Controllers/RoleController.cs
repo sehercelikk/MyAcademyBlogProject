@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Blogy.WebUI.Areas.Admin.Controllers;
 
@@ -27,6 +28,13 @@ public class RoleController(RoleManager<AppRole> _roleManager) : Controller
             }
             return View(result);
         }
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> DeleteRole(int id)
+    {
+        var role = await _roleManager.FindByIdAsync(id.ToString());
+        await _roleManager.DeleteAsync(role);
         return RedirectToAction("Index");
     }
 }
