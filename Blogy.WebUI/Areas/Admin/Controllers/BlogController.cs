@@ -1,6 +1,7 @@
 ﻿using Blogy.Business.DTOS.BlogDtos;
 using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace Blogy.WebUI.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize]
 public class BlogController : Controller
 {
     private readonly IBlogService _blogService;
