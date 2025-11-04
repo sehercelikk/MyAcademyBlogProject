@@ -1,6 +1,7 @@
 ﻿using Blogy.Business.AutoMapper;
 using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
+using Blogy.Business.Services.CommentService;
 using Blogy.Business.Validators.CategoryValidators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -17,6 +18,7 @@ public static class BusinessServiceRegistirationExtension
 
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IBlogService, BlogService>();
+        services.AddScoped<ICommentService, CommentService>();
 
         services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()
