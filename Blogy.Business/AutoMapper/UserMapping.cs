@@ -10,5 +10,6 @@ public class UserMapping : Profile
     {
         CreateMap<AppUser, ResultUserDto>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName))).ReverseMap();
+        CreateMap<AppUser, EditProfileDto>().ReverseMap();
     }
 }
