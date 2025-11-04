@@ -1,5 +1,6 @@
 using Blogy.DataAccess.Extensions;
 using Blogy.Business.Extensions;
+using Blogy.WebUI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositoriesExtension(builder.Configuration);
 builder.Services.AddServiceExtension();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(opt =>
+{
+    opt.Filters.Add<ValidationExceptionFilter>();
+});
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
