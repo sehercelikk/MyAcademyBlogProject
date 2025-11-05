@@ -19,7 +19,7 @@ public class CommentController(ICommentService _commentService,IBlogService _blo
     private async Task GetBlogs()
     {
         var result= await _blogService.GetAllAsync();
-        ViewBag.Blogs(from blog in result
+        ViewBag.Blogs=(from blog in result
                       select new SelectListItem
                       {
                           Text = blog.Title,
@@ -44,6 +44,8 @@ public class CommentController(ICommentService _commentService,IBlogService _blo
     {
         var user= await _userManager.FindByNameAsync(User.Identity.Name);
         model.UserId= user.Id;
+
+        await GetBlogs();
         await _commentService.CreateAsync(model);
         return RedirectToAction(nameof(Index));
     }

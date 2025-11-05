@@ -1,8 +1,10 @@
 ﻿using Blogy.Business.DTOS.BlogDtos;
 using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
+using Blogy.Entities.Concrete;
 using Blogy.WebUI.Consts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,10 +16,12 @@ public class BlogController : Controller
 {
     private readonly IBlogService _blogService;
     private readonly ICategoryService _categoryService;
-    public BlogController(IBlogService blogService, ICategoryService categoryService)
+    private readonly UserManager<AppUser> _userManager;
+    public BlogController(IBlogService blogService, ICategoryService categoryService, UserManager<AppUser> userManager)
     {
         _blogService = blogService;
         _categoryService = categoryService;
+        _userManager = userManager;
     }
 
     private async Task GetCategories()
@@ -46,6 +50,9 @@ public class BlogController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateBlog(CreateBlogDto model)
     {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        model.WriterId = user.Id;
+
         if(!ModelState.IsValid)
         {
             await GetCategories();

@@ -1,0 +1,36 @@
+﻿@using Blogy.Business.DTOS.CommentDtos
+@model List<ResultCommentDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<h1>Yorumlar</h1>
+
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>Blog Id</th>
+            <th>Yorum İçeriği</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.BlogId</td>
+                <td>@item.Content</td>
+                <td><a href="/Admin/Comment/DeleteComment/@item.Id" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Admin/Comment/UpdateComment/@item.Id" class="btn btn-outline-info">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Admin/Comment/CreateComment" class="btn btn-outline-success">Ekle</a>
+</div>
+
+

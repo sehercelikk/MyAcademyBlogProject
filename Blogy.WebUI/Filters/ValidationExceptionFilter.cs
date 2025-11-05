@@ -14,6 +14,7 @@ public class ValidationExceptionFilter : IExceptionFilter
         }
        foreach (var error in validationException.Errors)
         {
+
             context.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
         }
         var actionName= context.RouteData.Values["action"]?.ToString();
