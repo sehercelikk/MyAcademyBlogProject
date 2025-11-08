@@ -5,5 +5,5 @@ namespace Blogy.Entities.Concrete;
 public class Tag : BaseEntity
 {
     public string Name { get; set; }
-    public List<BlogTag> BlogTags { get; set; }
+    public virtual List<BlogTag> BlogTags { get; set; }
 }

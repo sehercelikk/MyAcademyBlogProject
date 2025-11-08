@@ -37,7 +37,7 @@ public class BlogController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var result = await _blogService.GetBlogWithCategoryAsync();
+        var result = await _blogService.GetAllAsync();
         return View(result);
     }
 

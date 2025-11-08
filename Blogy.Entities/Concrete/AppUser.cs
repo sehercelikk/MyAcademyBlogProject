@@ -8,6 +8,6 @@ public class AppUser : IdentityUser<int>
     public string LastName { get; set; }
     public string? Title { get; set; }
     public string? ImageUrl { get; set; }
-    public List<Blog> Blogs { get; set; }
-    public List<Comment> Comments { get; set; }
+    public virtual List<Blog> Blogs { get; set; }
+    public virtual List<Comment> Comments { get; set; }
 }
