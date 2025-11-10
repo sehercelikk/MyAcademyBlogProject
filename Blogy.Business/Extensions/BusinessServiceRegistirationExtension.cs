@@ -6,6 +6,8 @@ using Blogy.Business.Validators.CategoryValidators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using Scrutor;
+using System.Reflection;
 
 namespace Blogy.Business.Extensions;
 
@@ -15,10 +17,16 @@ public static class BusinessServiceRegistirationExtension
     {
         services.AddAutoMapper(typeof(CategoryMapping).Assembly);
 
-
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IBlogService, BlogService>();
-        services.AddScoped<ICommentService, CommentService>();
+        services.Scan(opt =>
+        {
+            opt.FromAssemblies(Assembly.GetExecutingAssembly())
+            .AddClasses(publicOnly: false)
+            .UsingRegistrationStrategy(registrationStrategy: RegistrationStrategy.Skip)
+            .AsMatchingInterface()
+            .AsImplementedInterfaces()
+            .WithScopedLifetime();
+        });
+       
 
         services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()
