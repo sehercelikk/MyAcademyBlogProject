@@ -35,6 +35,12 @@ public class CommentService : ICommentService
         await _commentRepository.DeleteAsync(id);
     }
 
+    public async Task<ResultCommentDto> GetSingleIdAsync(int id)
+    {
+        var entity = await _commentRepository.GetByIdAsync(id);
+        return _mapper.Map<ResultCommentDto>(entity);
+    }
+
     public async Task<List<ResultCommentDto>> GetAllAsync()
     {
         var result= await _commentRepository.GetAllAsync();

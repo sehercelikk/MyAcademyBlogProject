@@ -1,12 +1,14 @@
-﻿using Blogy.Business.DTOS.BlogDtos;
+﻿using AutoMapper;
+using Blogy.Business.DTOS.BlogDtos;
 using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
 using Microsoft.AspNetCore.Mvc;
 using PagedList.Core;
+using System.Threading.Tasks;
 
 namespace Blogy.WebUI.Controllers;
 
-public class BlogController(IBlogService _blogService, ICategoryService _categoryService) : Controller
+public class BlogController(IBlogService _blogService, ICategoryService _categoryService,IMapper _mapper) : Controller
 {
     public async Task<IActionResult> Index(int page=1, int pageSize=2)
     {
@@ -20,5 +22,11 @@ public class BlogController(IBlogService _blogService, ICategoryService _categor
         var category= await _categoryService.GetCategoryByIdAsync(id);
         ViewBag.CategoryName = category.Name;
         return View(result);
+    }
+
+    public async Task<IActionResult> BlogDetails(int id)
+    {
+        var blog =await _blogService.GetSingleIdAsync(id);
+        return View(blog);
     }
 }

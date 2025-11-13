@@ -1,4 +1,6 @@
 ﻿using Blogy.Business.DTOS.CategoryDtos;
+using Blogy.Business.DTOS.CommentDtos;
+using Blogy.Business.DTOS.UserDtos;
 using Blogy.Entities.Concrete;
 
 namespace Blogy.Business.DTOS.BlogDtos;
@@ -14,4 +16,10 @@ public class ResultBlogDto
     public DateTime CreatedDate { get; set; }
     public int CategoryId { get; set; }
     public ResultCategoryDto Category { get; set; }
+    public List<BlogTag> BlogTags { get; set; }
+    public int WriterId { get; set; }
+    public ResultUserDto Writer { get; set; }
+    public List<ResultCommentDto> Comments { get; set; }
+
+
 }

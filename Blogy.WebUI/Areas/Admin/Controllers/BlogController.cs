@@ -72,7 +72,9 @@ public class BlogController : Controller
     [HttpPost]
     public async Task<IActionResult> UpdateBlog(UpdateBlogDto model)
     {
-        if(!ModelState.IsValid)
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        model.WriterId = user.Id;
+        if (!ModelState.IsValid)
         {
             await GetCategories();
             return View(model);

@@ -4,6 +4,7 @@ public interface IGenericService<TResult,TUpdate,TCreate>
 {
     Task<List<TResult>> GetAllAsync();
     Task<TUpdate?> GetByIdAsync(int id);
+    Task<TResult> GetSingleIdAsync(int id);
     Task CreateAsync(TCreate createDto);
     Task UpdateAsync(TUpdate updateDto);
     Task DeleteAsync(int id);

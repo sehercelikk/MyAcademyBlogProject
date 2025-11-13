@@ -18,6 +18,12 @@ public class BlogService(IBlogRepository _blog,IMapper _mapper) : IBlogService
         await _blog.DeleteAsync(id);
     }
 
+    public async Task<ResultBlogDto> GetSingleIdAsync(int id)
+    {
+        var findEntity= await _blog.GetByIdAsync(id);
+        return _mapper.Map<ResultBlogDto>(findEntity);
+    }
+
     public async Task<List<ResultBlogDto>> GetAllAsync()
     {
         var result= await _blog.GetAllAsync();

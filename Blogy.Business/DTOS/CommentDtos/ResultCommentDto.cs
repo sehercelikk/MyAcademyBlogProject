@@ -12,4 +12,6 @@ public class ResultCommentDto
     public ResultBlogDto Blog { get; set; }
     public int UserId { get; set; }
     public ResultUserDto User { get; set; }
+    public DateTime CreatedDate { get; set; }
+
 }
